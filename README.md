@@ -24,30 +24,41 @@ STEP-5: Read the characters row wise or column wise in the former order to get t
 #include <string.h>
 int main()
 {
-    char text[100],rail[10][100],cipher[100];
-    int i,j,row=0,dir=1,k=0,rails;
+    char text[100], rail[10][100], cipher[100];
+    int i, j, row = 0, direction = 1;
+    int k = 0, rails;
     printf("Enter plaintext: ");
-    scanf("%s",text);
-    printf("Enter number of rails: ");
-    scanf("%d",&rails);
-    for(i=0;i<rails;i++)
-        for(j=0;j<strlen(text);j++)
-            rail[i][j]='\n';
-    for(i=0;text[i]!='\0';i++)
+    scanf("%s", text);
+    printf("Enter rails: ");
+    scanf("%d", &rails);
+    for (i = 0; i < rails; i++)
     {
-        rail[row][i]=text[i];
-        if(row==0)
-            dir=1;
-        else if(row==rails-1)
-            dir=-1;
-        row+=dir;
+        for (j = 0; j < strlen(text); j++)
+        {
+            rail[i][j] = '\n';
+        }
     }
-    for(i=0;i<rails;i++)
-        for(j=0;j<strlen(text);j++)
-            if(rail[i][j]!='\n')
-                cipher[k++]=rail[i][j];
-    cipher[k]='\0';
-    printf("Cipher text: %s\n",cipher);
+    for (i = 0; text[i]; i++)
+    {
+        rail[row][i] = text[i];
+
+        if (row == 0)
+            direction = 1;
+        else if (row == rails - 1)
+            direction = -1;
+
+        row += direction;
+    }
+    for (i = 0; i < rails; i++)
+    {
+        for (j = 0; text[j]; j++)
+        {
+            if (rail[i][j] != '\n')
+                cipher[k++] = rail[i][j];
+        }
+    }
+    cipher[k] = '\0';
+    printf("Cipher text: %s", cipher);
     return 0;
 }
 ```
